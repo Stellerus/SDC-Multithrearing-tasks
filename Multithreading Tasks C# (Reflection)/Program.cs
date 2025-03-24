@@ -19,7 +19,7 @@ while (true)
         continue;
     }
 
-    var type = CreateInstance(classType);
+    var typeInstance = CreateInstance(classType);
 
 
     Console.WriteLine("Enter method name");
@@ -42,7 +42,7 @@ while (true)
         {
             Console.WriteLine(param);
         }
-        classMethod.Invoke(classMethod, null);
+        classMethod.Invoke(null, null);
     }
 }
 

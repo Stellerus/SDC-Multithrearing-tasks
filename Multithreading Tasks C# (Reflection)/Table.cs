@@ -12,21 +12,11 @@ namespace Furniture
         public int Legs { get; private set; }
         public float Slope { get; private set; }
 
-        public Table()
+        public Table(int legs, float slope)
         {
-            Legs = 4;
-            Slope = 0;
+            Legs = legs;
+            Slope = slope;
         }
-        //public Table(int legs)
-        //{
-        //    Legs = legs;
-        //    Slope = 0;
-        //}
-        //public Table(int legs, float slope)
-        //{
-        //    Legs = legs;
-        //    Slope = slope;
-        //}
 
         public void Stand()
         {
