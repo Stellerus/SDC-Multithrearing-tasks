@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Task2</id>
+    <version>1.0.0</version>
+    <authors>Task2</authors>
+    <description>Package Description</description>
+    <repository type="git" commit="6bbb4ddfaf4a3d85348490a914a6564415286891" />
+    <dependencies>
+      <group targetFramework="net6.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\petro\Documents\GitHub\SDC-Multithrearing-tasks\Task2\bin\Debug\net6.0\Task2.runtimeconfig.json" target="lib\net6.0\Task2.runtimeconfig.json" />
+    <file src="C:\Users\petro\Documents\GitHub\SDC-Multithrearing-tasks\Task2\bin\Debug\net6.0\Task2.dll" target="lib\net6.0\Task2.dll" />
+  </files>
+</package>

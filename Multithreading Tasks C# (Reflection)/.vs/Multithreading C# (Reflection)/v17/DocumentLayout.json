@@ -3,17 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\petro\\Documents\\GitHub\\SDC-Multithrearing-tasks\\Multithreading Tasks C# (Reflection)\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F5FBE1FB-4DC3-447E-ADC5-8B58272F724F}|Task1.csproj|c:\\users\\petro\\documents\\github\\sdc-multithrearing-tasks\\multithreading tasks c# (reflection)\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F5FBE1FB-4DC3-447E-ADC5-8B58272F724F}|Task1.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8B36F765-9BF9-4CD6-9E5E-0CD50012F528}|..\\Task2\\Task2.csproj|c:\\users\\petro\\documents\\github\\sdc-multithrearing-tasks\\task2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{69E19CA7-E33C-42BF-8A1B-2E94022BAB68}|..\\ClassLib(Task2)\\ClassLib(Task2).csproj|c:\\users\\petro\\documents\\github\\sdc-multithrearing-tasks\\classlib(task2)\\bike.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8B36F765-9BF9-4CD6-9E5E-0CD50012F528}|..\\Task2\\Task2.csproj|c:\\users\\petro\\documents\\github\\sdc-multithrearing-tasks\\task2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{69E19CA7-E33C-42BF-8A1B-2E94022BAB68}|..\\ClassLib(Task2)\\ClassLib(Task2).csproj|c:\\users\\petro\\documents\\github\\sdc-multithrearing-tasks\\classlib(task2)\\classextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{69E19CA7-E33C-42BF-8A1B-2E94022BAB68}|..\\ClassLib(Task2)\\ClassLib(Task2).csproj|c:\\users\\petro\\documents\\github\\sdc-multithrearing-tasks\\classlib(task2)\\manufacturer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F5FBE1FB-4DC3-447E-ADC5-8B58272F724F}|Task1.csproj|c:\\users\\petro\\documents\\github\\sdc-multithrearing-tasks\\multithreading tasks c# (reflection)\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F5FBE1FB-4DC3-447E-ADC5-8B58272F724F}|Task1.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F5FBE1FB-4DC3-447E-ADC5-8B58272F724F}|Task1.csproj|c:\\users\\petro\\documents\\github\\sdc-multithrearing-tasks\\multithreading tasks c# (reflection)\\table.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -33,7 +36,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 22,
+          "SelectedChildIndex": 17,
           "Children": [
             {
               "$type": "Bookmark",
@@ -102,12 +105,25 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "ClassExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\petro\\Documents\\GitHub\\SDC-Multithrearing-tasks\\ClassLib(Task2)\\ClassExtensions.cs",
+              "RelativeDocumentMoniker": "..\\ClassLib(Task2)\\ClassExtensions.cs",
+              "ToolTip": "C:\\Users\\petro\\Documents\\GitHub\\SDC-Multithrearing-tasks\\ClassLib(Task2)\\ClassExtensions.cs",
+              "RelativeToolTip": "..\\ClassLib(Task2)\\ClassExtensions.cs",
+              "ViewState": "AQIAABkAAAAAAAAAAAAQwGYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-31T16:36:31.096Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\petro\\Documents\\GitHub\\SDC-Multithrearing-tasks\\Task2\\Program.cs",
               "RelativeDocumentMoniker": "..\\Task2\\Program.cs",
               "ToolTip": "C:\\Users\\petro\\Documents\\GitHub\\SDC-Multithrearing-tasks\\Task2\\Program.cs",
               "RelativeToolTip": "..\\Task2\\Program.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAABkAAAAAAAAA",
+              "ViewState": "AQIAAFIAAAAAAAAAAAAUwFIAAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-24T20:30:32.947Z",
               "EditorCaption": ""
@@ -120,7 +136,7 @@
               "RelativeDocumentMoniker": "..\\ClassLib(Task2)\\Bike.cs",
               "ToolTip": "C:\\Users\\petro\\Documents\\GitHub\\SDC-Multithrearing-tasks\\ClassLib(Task2)\\Bike.cs",
               "RelativeToolTip": "..\\ClassLib(Task2)\\Bike.cs",
-              "ViewState": "AQIAADcAAAAAAAAAAAAAABQAAABiAAAA",
+              "ViewState": "AQIAABgAAAAAAAAAAAAgwBoAAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-24T20:30:07.048Z",
               "EditorCaption": ""
@@ -133,14 +149,14 @@
               "RelativeDocumentMoniker": "..\\ClassLib(Task2)\\Manufacturer.cs",
               "ToolTip": "C:\\Users\\petro\\Documents\\GitHub\\SDC-Multithrearing-tasks\\ClassLib(Task2)\\Manufacturer.cs",
               "RelativeToolTip": "..\\ClassLib(Task2)\\Manufacturer.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAAwAAAAAAAAAAA",
+              "ViewState": "AQIAAAkAAAAAAAAAAAA4wBoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-24T20:30:02.53Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Manufacturer.cs",
               "DocumentMoniker": "C:\\Users\\petro\\OneDrive\\Desktop\\Multithreading Tasks C# 1\\ClassLib(Task2)\\Manufacturer.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\OneDrive\\Desktop\\Multithreading Tasks C# 1\\ClassLib(Task2)\\Manufacturer.cs",
@@ -152,7 +168,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\petro\\OneDrive\\Desktop\\Multithreading Tasks C# 1\\Task2\\Program.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\OneDrive\\Desktop\\Multithreading Tasks C# 1\\Task2\\Program.cs",
@@ -163,7 +179,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Table.cs",
               "DocumentMoniker": "C:\\Users\\petro\\Documents\\GitHub\\SDC-Multithrearing-tasks\\Multithreading Tasks C# (Reflection)\\Table.cs",
               "RelativeDocumentMoniker": "Table.cs",
@@ -176,13 +192,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\petro\\Documents\\GitHub\\SDC-Multithrearing-tasks\\Multithreading Tasks C# (Reflection)\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\petro\\Documents\\GitHub\\SDC-Multithrearing-tasks\\Multithreading Tasks C# (Reflection)\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAE0AAAAAAAAAAAAswCIAAAAFAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACIAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-24T17:46:09.407Z",
               "EditorCaption": ""

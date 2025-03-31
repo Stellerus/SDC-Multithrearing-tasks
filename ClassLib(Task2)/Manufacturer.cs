@@ -20,53 +20,10 @@ namespace BikeLibrary
             IsAChildCompany = isAChildCompany;
         }
 
-        public Manufacturer Create(string name, string adress, bool isAChildCompany)
+        public static Manufacturer Create(string name, string address, bool isAChildCompany)
         {
-            return new Manufacturer(Name, Address, IsAChildCompany);
+            return new Manufacturer(name, address, isAChildCompany);
         }
 
-        public void PrintObject()
-        {
-            var type = typeof(Bike);
-            if (type.IsClass)
-            {
-                Console.WriteLine($"Class named {type.Name}");
-
-                foreach (var prop in type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic))
-                {
-                    string getAccess;
-                    if (prop.GetMethod == null)
-                    {
-                        throw new NullReferenceException();
-                    }
-                    else if (prop.GetMethod.IsPublic == true)
-                    {
-                        getAccess = "Public";
-                    }
-                    else
-                    {
-                        getAccess = "Private";
-                    }
-
-                    string setAccess;
-                    if (prop.SetMethod == null)
-                    {
-                        throw new NullReferenceException();
-                    }
-                    else if (prop.SetMethod.IsPublic == true)
-                    {
-                        setAccess = "Public";
-                    }
-                    else
-                    {
-                        setAccess = "Private";
-                    }
-
-                    Console.WriteLine($" ({getAccess} Get/{setAccess} Set)  property: {prop.Name} ({prop.PropertyType.Name})");
-
-
-                }
-            }
-        }
     }
 }
