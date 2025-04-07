@@ -5,10 +5,9 @@ using System.Transactions;
 
 while (true)
 {
-
     Console.WriteLine("Enter class name");
 
-    //stated the class name including namespace
+    //Stated the class name including namespace
     string className = "Furniture." + Console.ReadLine();
 
     Type? classType = Type.GetType(className);
@@ -115,6 +114,7 @@ object?[]? ReturnParams(ParameterInfo[] ctorParams)
         {
             return null;
         }
+
         //converts string to simple ParameterType and adds to return array
         objList.Add(Convert.ChangeType(choice, ctorParams[i].ParameterType));
     }
