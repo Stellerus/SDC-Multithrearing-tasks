@@ -41,6 +41,10 @@ namespace BikeLibrary
                     Console.WriteLine($" ({getAccess} Get/{setAccess} Set)  property: {prop.Name} ({prop.PropertyType.Name})");
                 }
             }
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
             string HasGetter(PropertyInfo? prop)
             {
                 string getAccess;
