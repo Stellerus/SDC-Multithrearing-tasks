@@ -128,7 +128,7 @@
               "RelativeDocumentMoniker": "..\\Task2\\Program.cs",
               "ToolTip": "C:\\Users\\petro\\Documents\\GitHub\\SDC-Multithrearing-tasks\\Lab 1 (Reflection)\\Task2\\Program.cs",
               "RelativeToolTip": "..\\Task2\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAD8AAAAAAAAA",
+              "ViewState": "AQIAADgAAAAAAAAAAAAAwDwAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-14T10:08:39.97Z",
               "EditorCaption": ""
@@ -143,8 +143,7 @@
               "RelativeToolTip": "..\\ClassLib\\ClassLib.csproj",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-04-07T10:11:14.339Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-07T10:11:14.339Z"
             },
             {
               "$type": "Document",
@@ -156,8 +155,7 @@
               "RelativeToolTip": "..\\ClassLib\\Bike.cs",
               "ViewState": "AQIAAE8AAAAAAAAAAADwvwAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-07T10:12:19.13Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-07T10:12:19.13Z"
             },
             {
               "$type": "Document",
@@ -169,8 +167,7 @@
               "RelativeToolTip": "..\\Task3\\Program.cs",
               "ViewState": "AQIAAAkAAAAAAAAAAAAAAA0AAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-14T10:08:14.442Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-14T10:08:14.442Z"
             },
             {
               "$type": "Document",
@@ -182,8 +179,7 @@
               "RelativeToolTip": "..\\ClassLib\\Manufacturer.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAC0AAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-14T10:08:14.446Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-14T10:08:14.446Z"
             },
             {
               "$type": "Document",
@@ -285,8 +281,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-24T17:46:09.407Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-24T17:46:09.407Z"
             }
           ]
         }
