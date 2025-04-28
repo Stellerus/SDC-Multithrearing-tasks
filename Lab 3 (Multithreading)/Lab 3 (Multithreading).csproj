@@ -8,4 +8,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Lab 1 (Reflection)\ClassLib\ClassLib.csproj" />
+  </ItemGroup>
+
 </Project>
