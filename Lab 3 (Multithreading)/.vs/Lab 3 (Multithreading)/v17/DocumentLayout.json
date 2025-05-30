@@ -1,17 +1,10 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\petro\\Documents\\GitHub\\SDC-Multithrearing-tasks\\Lab 3 (Multithreading)\\",
+  "WorkspaceRootPath": "C:\\Users\\petro\\OneDrive\\Documentos\\GitHub\\SDC-Multithrearing-tasks\\Lab 3 (Multithreading)\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DE43746D-B87A-4C46-BC6B-8BBA3A162286}|Lab 3 (Multithreading).csproj|c:\\users\\petro\\documents\\github\\sdc-multithrearing-tasks\\lab 3 (multithreading)\\threadhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{DE43746D-B87A-4C46-BC6B-8BBA3A162286}|Lab 3 (Multithreading).csproj|c:\\users\\petro\\onedrive\\documentos\\github\\sdc-multithrearing-tasks\\lab 3 (multithreading)\\threadhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DE43746D-B87A-4C46-BC6B-8BBA3A162286}|Lab 3 (Multithreading).csproj|solutionrelative:threadhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DE43746D-B87A-4C46-BC6B-8BBA3A162286}|Lab 3 (Multithreading).csproj|c:\\users\\petro\\documents\\github\\sdc-multithrearing-tasks\\lab 3 (multithreading)\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DE43746D-B87A-4C46-BC6B-8BBA3A162286}|Lab 3 (Multithreading).csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7246784B-BE41-4D22-BC2E-1181C35627D0}|..\\..\\Lab 1 (Reflection)\\ClassLib\\ClassLib.csproj|c:\\users\\petro\\documents\\github\\lab 1 (reflection)\\classlib\\bike.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -21,109 +14,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 16,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:134:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:133:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:136:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:135:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:134:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:133:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "ThreadHandler.cs",
-              "DocumentMoniker": "C:\\Users\\petro\\Documents\\GitHub\\SDC-Multithrearing-tasks\\Lab 3 (Multithreading)\\ThreadHandler.cs",
+              "DocumentMoniker": "C:\\Users\\petro\\OneDrive\\Documentos\\GitHub\\SDC-Multithrearing-tasks\\Lab 3 (Multithreading)\\ThreadHandler.cs",
               "RelativeDocumentMoniker": "ThreadHandler.cs",
-              "ToolTip": "C:\\Users\\petro\\Documents\\GitHub\\SDC-Multithrearing-tasks\\Lab 3 (Multithreading)\\ThreadHandler.cs",
+              "ToolTip": "C:\\Users\\petro\\OneDrive\\Documentos\\GitHub\\SDC-Multithrearing-tasks\\Lab 3 (Multithreading)\\ThreadHandler.cs",
               "RelativeToolTip": "ThreadHandler.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABcAAAAJAAAA",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAxwB0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-28T21:08:59.633Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Bike.cs",
-              "DocumentMoniker": "C:\\Users\\petro\\Documents\\GitHub\\Lab 1 (Reflection)\\ClassLib\\Bike.cs",
-              "RelativeDocumentMoniker": "..\\..\\Lab 1 (Reflection)\\ClassLib\\Bike.cs",
-              "ToolTip": "C:\\Users\\petro\\Documents\\GitHub\\Lab 1 (Reflection)\\ClassLib\\Bike.cs",
-              "RelativeToolTip": "..\\..\\Lab 1 (Reflection)\\ClassLib\\Bike.cs",
-              "ViewState": "AQIAAAUAAAAAAAAAAAAAwAoAAAA2AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-28T21:05:22.996Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\petro\\Documents\\GitHub\\SDC-Multithrearing-tasks\\Lab 3 (Multithreading)\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\petro\\Documents\\GitHub\\SDC-Multithrearing-tasks\\Lab 3 (Multithreading)\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-28T13:44:40.964Z",
+              "WhenOpened": "2025-05-26T09:25:41.17Z",
               "EditorCaption": ""
             }
           ]

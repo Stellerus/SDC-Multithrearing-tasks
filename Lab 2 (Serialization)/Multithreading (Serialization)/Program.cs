@@ -53,18 +53,22 @@ while (!exit)
                     break;
             }
 
-            ShowDesctiption();
+            ShowDescription();
             break;
 
         case 2:
             SerializeObjects<Bike>();
+            if (true)
+            {
+
+            }
             SerializeObjects<Manufacturer>();
 
             Console.WriteLine($"Serialized to {path} path");
             break;
 
         case 3:
-            ShowDesctiption();
+            ShowDescription();
             Console.WriteLine();
             break;
 
@@ -73,6 +77,11 @@ while (!exit)
             break;
 
     }
+}
+
+void ShowDescription()
+{
+
 }
 
 List<Bike> CreateBikes(int n)
@@ -85,7 +94,7 @@ List<Bike> CreateBikes(int n)
     }
     return typeList;
 }
-List<Bike> CreateBikes(List<Manufacturer> existingManufacturers, int n)
+List<Bike> CreateBikesWithManufacturer(List<Manufacturer> existingManufacturers, int n)
 {
     List<Bike> typeList = new List<Bike>(n);
     for (int i = 0; i < typeList.Count; i++)
