@@ -2,6 +2,7 @@
 
 namespace BikeLibrary
 {
+    [Serializable]
     public class Bike
     {
         private int ID { get; set; }
@@ -9,6 +10,8 @@ namespace BikeLibrary
         public string SerialNumber { get; set; }
         public string BikeType { get; set; }
         public Manufacturer Manufacturer { get; set; }
+
+        public Bike() { }
 
         public Bike(int id, string name, string serialNumber, string bikeType, Manufacturer manufacturer)
         {
@@ -83,6 +86,11 @@ namespace BikeLibrary
                 }
                 return setAccess;
             }
+        }
+
+        public override string ToString()
+        {
+            return $"ID: {ID}, Name: {Name}, Serial: {SerialNumber}, Type: {BikeType}, Manufacturer: {Manufacturer?.Name}";
         }
     }
 

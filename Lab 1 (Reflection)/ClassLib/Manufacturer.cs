@@ -7,11 +7,14 @@ using System.Threading.Tasks;
 
 namespace BikeLibrary
 {
+    [Serializable]
     public class Manufacturer
     {
         public string Name { get; set; }
         public string Address { get; set; }
         private bool IsAChildCompany { get; set; }
+
+        public Manufacturer() {}
 
         public Manufacturer(string name, string address, bool isAChildCompany)
         {
@@ -85,6 +88,11 @@ namespace BikeLibrary
                 }
                 return setAccess;
             }
+        }
+
+        public override string ToString()
+        {
+            return $"{Name}, {Address}, Is a child company: {IsAChildCompany}";
         }
     }
 }

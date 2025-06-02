@@ -1,160 +1,219 @@
 ﻿using BikeLibrary;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Xml.Serialization;
 
 
-XmlSerializer manufacturerSerializer = new XmlSerializer(typeof(Manufacturer));
-XmlSerializer bikeSerializer = new XmlSerializer(typeof(Bike));
+    List<Bike> bikeList = new List<Bike>();
+    List<Manufacturer> manufacturerList = new List<Manufacturer>();
+    Random rnd = new Random();
+    string bikeXmlPath = "bikes.xml";
+    string manufacturerXmlPath = "manufacturers.xml";
 
-Random rnd = new Random();
-
-bool exit = false;
-
-
-int userChoice = 0;
-Type type;
-string path = "";
-List<object> allObjects = new List<object>();
+    bool exit = false;
 
 while (!exit)
 {
-    Console.WriteLine($"1. Create 10 objects of Type");
-    Console.WriteLine($"2. Serialize to XML");
-    Console.WriteLine($"3. Show file description");
+    Console.WriteLine("\n--- Main Menu ---");
+    Console.WriteLine("1. Create objects");
+    Console.WriteLine("2. Serialize objects to XML");
+    Console.WriteLine("3. Show XML file contents");
+    Console.WriteLine("4. Deserialize and display");
+    Console.WriteLine("5. Show all 'Model' values (XDocument)");
+    Console.WriteLine("6. Show all 'Model' values (XmlDocument)");
+    Console.WriteLine("7. Modify Bike value (XDocument)");
+    Console.WriteLine("8. Modify Bike value (XmlDocument)");
+    Console.WriteLine("0. Exit");
 
-    switch (userChoice)
+    Console.Write("Select an option: ");
+    string? menuChoice = Console.ReadLine();
+
+    switch (menuChoice)
     {
-        case 1:
-            int choice = 0;
-            int quantity = 0;
-            string? input = Console.ReadLine();
-            if (input == null)
-            {
-                throw new NullReferenceException();
-            }
-            quantity = int.Parse(input);
-            Console.WriteLine($"1. Create {quantity} objects of Bike Type");
-            Console.WriteLine($"2. Create {quantity} objects of Manufacturer Type");
-            switch (choice)
-            {
-                case 1:
-                    List<Bike> bikeList = CreateBikes(quantity);
-                    type = bikeList.GetType();
-                    Console.WriteLine($"{quantity} objects of {type.GetType()} created");
-                    break;
-
-                case 2:
-                    List<Manufacturer> manufacturerList = CreateManufacturers(quantity);
-                    type = manufacturerList.GetType();
-                    Console.WriteLine($"{quantity} objects of {type.GetType()} created");
-                    break;
-
-                default:
-                    break;
-            }
-
-            ShowDescription();
+        case "1":
+            CreateObjectsMenu();
+            break;
+        case "2":
+            SerializeObjects();
+            break;
+        case "3":
+            ShowFileContents();
+            break;
+        case "4":
+            DeserializeAndShow();
+            break;
+        case "5":
+            XmlUtility.ShowBikeValuesXDocument();
+            break;
+        case "6":
+            XmlUtility.ShowBikeValuesXmlDocument();
+            break;
+        case "7":
+            ModifyElement(true);
+            break;
+        case "8":
+            ModifyElement(false);
             break;
 
-        case 2:
-            SerializeObjects<Bike>();
-            if (true)
-            {
-
-            }
-            SerializeObjects<Manufacturer>();
-
-            Console.WriteLine($"Serialized to {path} path");
+        case "0":
+            exit = true;
             break;
-
-        case 3:
-            ShowDescription();
-            Console.WriteLine();
-            break;
-
         default:
-            Console.WriteLine("Exiting");
+            Console.WriteLine("Invalid choice.");
             break;
-
     }
 }
 
-void ShowDescription()
+void CreateObjectsMenu()
 {
+    Console.Write("How many objects to create? ");
+    if (!int.TryParse(Console.ReadLine(), out int quantity) || quantity <= 0)
+    {
+        Console.WriteLine("Invalid number.");
+        return;
+    }
 
+    Console.WriteLine("1. Create Bike objects");
+    Console.WriteLine("2. Create Manufacturer objects");
+
+    Console.Write("Choose type: ");
+    string? typeChoice = Console.ReadLine();
+
+    switch (typeChoice)
+    {
+        case "1":
+            bikeList = CreateBikes(quantity);
+            Console.WriteLine($"{quantity} Bike objects created.");
+            break;
+        case "2":
+            manufacturerList = CreateManufacturers(quantity);
+            Console.WriteLine($"{quantity} Manufacturer objects created.");
+            break;
+        default:
+            Console.WriteLine("Invalid choice.");
+            break;
+    }
 }
 
 List<Bike> CreateBikes(int n)
 {
-    List<Bike> typeList = new List<Bike>(n);
-    for (int i = 0; i < typeList.Count; i++)
+    var list = new List<Bike>();
+    for (int i = 0; i < n; i++)
     {
-        Manufacturer defaultManufacturer = new Manufacturer("No Name", "Neverland str. 10", false);
-        typeList[i] = new Bike(rnd.Next(), rnd.Next().ToString(), rnd.Next().ToString(), rnd.Next().ToString(), defaultManufacturer );
+        var manufacturer = new Manufacturer($"Name {i}", $"Adress {i}", rnd.Next(0, 2) == 1);
+        list.Add(new Bike(
+            id: rnd.Next(1000, 9999),
+            name: $"BikeName{i}",
+            serialNumber: $"SN{i:D6}",
+            bikeType: $"Type{i % 3}",
+            manufacturer: manufacturer));
     }
-    return typeList;
-}
-List<Bike> CreateBikesWithManufacturer(List<Manufacturer> existingManufacturers, int n)
-{
-    List<Bike> typeList = new List<Bike>(n);
-    for (int i = 0; i < typeList.Count; i++)
-    {
-        typeList[i] = new Bike(rnd.Next(), rnd.Next().ToString(), rnd.Next().ToString(), rnd.Next().ToString(),
-            existingManufacturers[rnd.Next(0,existingManufacturers.Count)]);
-    }
-    return typeList;
+    return list;
 }
 
 List<Manufacturer> CreateManufacturers(int n)
 {
-    List<Manufacturer> typeList = new List<Manufacturer>(n);
-    for (int i = 0; i < typeList.Count; i++)
+    var list = new List<Manufacturer>();
+    for (int i = 0; i < n; i++)
     {
-        Manufacturer defaultManufacturer = new Manufacturer("No Name", "Neverland str. 10", false);
-        typeList[i] = new Manufacturer(rnd.Next().ToString(), rnd.Next().ToString(), Convert.ToBoolean(rnd.Next(0,1)));
+        list.Add(new Manufacturer($"Name {i}", $"Adress {i}", rnd.Next(0, 2) == 1));
     }
-    return typeList;
+    return list;
 }
 
-
-
-void SerializeObjects<T>(List<T> typeList, XmlSerializer typeSerializer)
+void SerializeObjects()
 {
-    typeSerializer = new XmlSerializer(typeof(T));
-
-    using (FileStream fs = new FileStream("person.xml", FileMode.OpenOrCreate))
+    if (bikeList.Count > 0)
     {
-        for (int i = 0; i < typeList.Count; i++)
+        XmlSerializer bikeSerializer = new XmlSerializer(typeof(List<Bike>));
+        using (FileStream fs = new FileStream(bikeXmlPath, FileMode.Create))
         {
+            bikeSerializer.Serialize(fs, bikeList);
+        }
+        Console.WriteLine("Bike list serialized to XML.");
+    }
 
-            typeSerializer.Serialize(fs, typeList[i]);
+    if (manufacturerList.Count > 0)
+    {
+        XmlSerializer manufacturerSerializer = new XmlSerializer(typeof(List<Manufacturer>));
+        using (FileStream fs = new FileStream(manufacturerXmlPath, FileMode.Create))
+        {
+            manufacturerSerializer.Serialize(fs, manufacturerList);
+        }
+        Console.WriteLine("Manufacturer list serialized to XML.");
+    }
+}
 
-            Console.WriteLine("Object has been serialized");
+void ShowFileContents()
+{
+    if (File.Exists(bikeXmlPath))
+    {
+        Console.WriteLine("\n--- bikes.xml ---");
+        Console.WriteLine(File.ReadAllText(bikeXmlPath));
+    }
+
+    if (File.Exists(manufacturerXmlPath))
+    {
+        Console.WriteLine("\n--- manufacturers.xml ---");
+        Console.WriteLine(File.ReadAllText(manufacturerXmlPath));
+    }
+}
+
+void DeserializeAndShow()
+{
+    if (File.Exists(bikeXmlPath))
+    {
+        XmlSerializer bikeSerializer = new XmlSerializer(typeof(List<Bike>));
+        using (FileStream fs = new FileStream(bikeXmlPath, FileMode.Open))
+        {
+            var bikes = (List<Bike>)bikeSerializer.Deserialize(fs);
+            Console.WriteLine("\n--- Deserialized Bikes ---");
+            foreach (var b in bikes)
+            {
+                Console.WriteLine(b);
+            }
+        }
+    }
+
+    if (File.Exists(manufacturerXmlPath))
+    {
+        XmlSerializer manufacturerSerializer = new XmlSerializer(typeof(List<Manufacturer>));
+        using (FileStream fs = new FileStream(manufacturerXmlPath, FileMode.Open))
+        {
+            var manufacturers = (List<Manufacturer>)manufacturerSerializer.Deserialize(fs);
+            Console.WriteLine("\n--- Deserialized Manufacturers ---");
+            foreach (var m in manufacturers)
+            {
+                Console.WriteLine(m);
+            }
         }
     }
 }
-
-List<object> DeserealizeObjects(XmlSerializer typeSerializer)
+void ModifyElement(bool useXDocument)
 {
-    List<object>? typeList;
-    using (FileStream fs = new FileStream("person.xml", FileMode.OpenOrCreate))
+    Console.Write("Enter element name to modify (e.g., Name, Type): ");
+    string? elementName = Console.ReadLine();
+
+    Console.Write("Enter object index (0-based): ");
+    if (!int.TryParse(Console.ReadLine(), out int index))
     {
-        typeList = typeSerializer.Deserialize(fs) as List<object>;
-        if (typeList == null)
-        {
-            throw new NullReferenceException("");
-        }
+        Console.WriteLine("Invalid index.");
+        return;
     }
 
-    return typeList;
-}
+    Console.Write("Enter new value: ");
+    string? newValue = Console.ReadLine();
 
-void ShowBikes(List<object> list)
-{
-    foreach (object obj in list)
+    if (string.IsNullOrEmpty(elementName) || string.IsNullOrEmpty(newValue))
     {
-
+        Console.WriteLine("Invalid input.");
+        return;
     }
 
+    if (useXDocument)
+        XmlUtility.ModifyWithXDocument(elementName, index, newValue);
+    else
+        XmlUtility.ModifyWithXmlDocument(elementName, index, newValue);
 }
 

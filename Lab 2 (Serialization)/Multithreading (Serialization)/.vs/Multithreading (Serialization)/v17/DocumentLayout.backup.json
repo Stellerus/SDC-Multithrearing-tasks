@@ -3,8 +3,18 @@
   "WorkspaceRootPath": "C:\\Users\\petro\\OneDrive\\Documentos\\GitHub\\SDC-Multithrearing-tasks\\Lab 2 (Serialization)\\Multithreading (Serialization)\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{1A3D2692-A0EF-4585-9BD5-D7ED3F21809B}|Multithreading (Serialization).csproj|c:\\users\\petro\\onedrive\\documentos\\github\\sdc-multithrearing-tasks\\lab 2 (serialization)\\multithreading (serialization)\\xmlutility.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1A3D2692-A0EF-4585-9BD5-D7ED3F21809B}|Multithreading (Serialization).csproj|solutionrelative:xmlutility.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{1A3D2692-A0EF-4585-9BD5-D7ED3F21809B}|Multithreading (Serialization).csproj|c:\\users\\petro\\onedrive\\documentos\\github\\sdc-multithrearing-tasks\\lab 2 (serialization)\\multithreading (serialization)\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1A3D2692-A0EF-4585-9BD5-D7ED3F21809B}|Multithreading (Serialization).csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{272497C8-1F29-42BE-ACE9-B56300CABC45}|..\\..\\Lab 1 (Reflection)\\ClassLib\\ClassLib.csproj|c:\\users\\petro\\onedrive\\documentos\\github\\sdc-multithrearing-tasks\\lab 1 (reflection)\\classlib\\bike.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{272497C8-1F29-42BE-ACE9-B56300CABC45}|..\\..\\Lab 1 (Reflection)\\ClassLib\\ClassLib.csproj|c:\\users\\petro\\onedrive\\documentos\\github\\sdc-multithrearing-tasks\\lab 1 (reflection)\\classlib\\manufacturer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,17 +24,56 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Manufacturer.cs",
+              "DocumentMoniker": "C:\\Users\\petro\\OneDrive\\Documentos\\GitHub\\SDC-Multithrearing-tasks\\Lab 1 (Reflection)\\ClassLib\\Manufacturer.cs",
+              "RelativeDocumentMoniker": "..\\..\\Lab 1 (Reflection)\\ClassLib\\Manufacturer.cs",
+              "ToolTip": "C:\\Users\\petro\\OneDrive\\Documentos\\GitHub\\SDC-Multithrearing-tasks\\Lab 1 (Reflection)\\ClassLib\\Manufacturer.cs",
+              "RelativeToolTip": "..\\..\\Lab 1 (Reflection)\\ClassLib\\Manufacturer.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwF4AAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-02T09:39:26.235Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Bike.cs",
+              "DocumentMoniker": "C:\\Users\\petro\\OneDrive\\Documentos\\GitHub\\SDC-Multithrearing-tasks\\Lab 1 (Reflection)\\ClassLib\\Bike.cs",
+              "RelativeDocumentMoniker": "..\\..\\Lab 1 (Reflection)\\ClassLib\\Bike.cs",
+              "ToolTip": "C:\\Users\\petro\\OneDrive\\Documentos\\GitHub\\SDC-Multithrearing-tasks\\Lab 1 (Reflection)\\ClassLib\\Bike.cs",
+              "RelativeToolTip": "..\\..\\Lab 1 (Reflection)\\ClassLib\\Bike.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAcwF0AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-02T09:38:58.766Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "XMLUtility.cs",
+              "DocumentMoniker": "C:\\Users\\petro\\OneDrive\\Documentos\\GitHub\\SDC-Multithrearing-tasks\\Lab 2 (Serialization)\\Multithreading (Serialization)\\XMLUtility.cs",
+              "RelativeDocumentMoniker": "XMLUtility.cs",
+              "ToolTip": "C:\\Users\\petro\\OneDrive\\Documentos\\GitHub\\SDC-Multithrearing-tasks\\Lab 2 (Serialization)\\Multithreading (Serialization)\\XMLUtility.cs",
+              "RelativeToolTip": "XMLUtility.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAUwEcAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-02T09:38:14.098Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\petro\\OneDrive\\Documentos\\GitHub\\SDC-Multithrearing-tasks\\Lab 2 (Serialization)\\Multithreading (Serialization)\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\petro\\OneDrive\\Documentos\\GitHub\\SDC-Multithrearing-tasks\\Lab 2 (Serialization)\\Multithreading (Serialization)\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAJsAAAAAAAAAAAAIwMMAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-26T09:35:21.076Z",
               "EditorCaption": ""
