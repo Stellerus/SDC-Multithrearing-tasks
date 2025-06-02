@@ -7,14 +7,18 @@ using System.Xml.Serialization;
 
 List<Bike> bikeList = new List<Bike>();
 List<Manufacturer> manufacturerList = new List<Manufacturer>();
+
 Random rnd = new Random();
-string bikeXmlPath = "bikes.xml";
-string manufacturerXmlPath = "manufacturers.xml";
+
+// Paths
+const string bikeXmlPath = "bikes.xml";
+const string manufacturerXmlPath = "manufacturers.xml";
 
 bool exit = false;
 
 while (!exit)
 {
+    //Menu
     Console.WriteLine("\n--- Main Menu ---");
     Console.WriteLine("1. Create objects");
     Console.WriteLine("2. Serialize objects to XML");
@@ -65,6 +69,7 @@ while (!exit)
     }
 }
 
+//Creates n objects of chosen type through menu
 void CreateObjectsMenu()
 {
     Console.Write("How many objects to create? ");
@@ -96,32 +101,50 @@ void CreateObjectsMenu()
     }
 }
 
+// Creates n bikes with index values and internal manufacturer. Returns Generic list
 List<Bike> CreateBikes(int n)
 {
+    // Prefixes for Manufacturer
+    const string ManufacturerNamePrefix = "Name ";
+    const string ManufacturerAdressPrefix = "Adress ";
+
     var list = new List<Bike>();
     for (int i = 0; i < n; i++)
     {
-        var manufacturer = new Manufacturer($"Name {i}", $"Adress {i}", rnd.Next(0, 2) == 1);
+        var manufacturer = new Manufacturer($"{ManufacturerNamePrefix}{i}", $"{ManufacturerAdressPrefix}{i}", rnd.Next(0, 2) == 1);
+
+        // Prefixes and Postfixes for Bike
+        const string BikeNamePrefix = "BikeName ";
+        const string BikeSerialNumberPrefix = "SN";
+        const string BikeSerialNumberPostfix = "D6";
+        const string BikeTypePrefix = "Type";
+
         list.Add(new Bike(
             id: rnd.Next(1000, 9999),
-            name: $"BikeName{i}",
-            serialNumber: $"SN{i:D6}",
-            bikeType: $"Type{i % 3}",
+            name: $"{BikeNamePrefix}{i}",
+            serialNumber: $"{BikeSerialNumberPrefix}{i}{BikeSerialNumberPostfix}",
+            bikeType: $"{BikeTypePrefix}{i % 3}",
             manufacturer: manufacturer));
     }
     return list;
 }
 
+// Creates n Manufacturers with random values. Returns Generic list
 List<Manufacturer> CreateManufacturers(int n)
 {
+    // Prefixes for Manufacturer
+    const string ManufacturerNamePrefix = "Name ";
+    const string ManufacturerAdressPrefix = "Adress ";
+
     var list = new List<Manufacturer>();
     for (int i = 0; i < n; i++)
     {
-        list.Add(new Manufacturer($"Name {i}", $"Adress {i}", rnd.Next(0, 2) == 1));
+        list.Add(new Manufacturer($"{ManufacturerNamePrefix}{i}", $"{ManufacturerAdressPrefix}{i}", rnd.Next(0, 2) == 1));
     }
     return list;
 }
 
+// Basic Serialization to stated path
 void SerializeObjects()
 {
     if (bikeList.Count > 0)
@@ -145,6 +168,8 @@ void SerializeObjects()
     }
 }
 
+
+// Prints all Serealized data
 void ShowFileContents()
 {
     if (File.Exists(bikeXmlPath))
@@ -160,6 +185,7 @@ void ShowFileContents()
     }
 }
 
+// Prints all objects in deserealized way
 void DeserializeAndShow()
 {
     if (File.Exists(bikeXmlPath))
@@ -190,9 +216,11 @@ void DeserializeAndShow()
         }
     }
 }
+
+// Requires XName of value and changes in element with index number
 void ModifyElement(bool useXDocument)
 {
-    Console.Write("Enter element name to modify (e.g., Name, Type): ");
+    Console.Write("Enter element name to modify (e.g., Name, SerialNumber): ");
     string? elementName = Console.ReadLine();
 
     Console.Write("Enter object index (0-based): ");

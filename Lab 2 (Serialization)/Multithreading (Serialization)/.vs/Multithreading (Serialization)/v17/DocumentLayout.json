@@ -46,9 +46,10 @@
               "RelativeDocumentMoniker": "..\\..\\Lab 1 (Reflection)\\ClassLib\\Bike.cs",
               "ToolTip": "C:\\Users\\petro\\OneDrive\\Documentos\\GitHub\\SDC-Multithrearing-tasks\\Lab 1 (Reflection)\\ClassLib\\Bike.cs",
               "RelativeToolTip": "..\\..\\Lab 1 (Reflection)\\ClassLib\\Bike.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAcwF0AAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAcAAAAAAAAAAAA1wF0AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T09:38:58.766Z"
+              "WhenOpened": "2025-06-02T09:38:58.766Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -58,7 +59,7 @@
               "RelativeDocumentMoniker": "XMLUtility.cs",
               "ToolTip": "C:\\Users\\petro\\OneDrive\\Documentos\\GitHub\\SDC-Multithrearing-tasks\\Lab 2 (Serialization)\\Multithreading (Serialization)\\XMLUtility.cs",
               "RelativeToolTip": "XMLUtility.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADMAAAA2AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGUAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-02T09:38:14.098Z",
               "EditorCaption": ""
@@ -71,7 +72,7 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\petro\\OneDrive\\Documentos\\GitHub\\SDC-Multithrearing-tasks\\Lab 2 (Serialization)\\Multithreading (Serialization)\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAN4AAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-26T09:35:21.076Z",
               "EditorCaption": ""

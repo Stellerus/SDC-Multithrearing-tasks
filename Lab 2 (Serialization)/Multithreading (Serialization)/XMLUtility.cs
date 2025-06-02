@@ -6,7 +6,9 @@ using System.Xml.Linq;
 public static class XmlUtility
 {
     private const string BikePath = "bikes.xml";
+    const string TypeName = "Bike";
 
+    // Writes Values in console using Xdocument
     public static void ShowBikeValuesXDocument()
     {
         if (!File.Exists(BikePath))
@@ -16,7 +18,7 @@ public static class XmlUtility
         }
 
         XDocument doc = XDocument.Load(BikePath);
-        var models = doc.Descendants("Bike");
+        var models = doc.Descendants(TypeName);
 
         Console.WriteLine("\n-- Bikes (XDocument) --");
         foreach (var model in models)
@@ -25,6 +27,7 @@ public static class XmlUtility
         }
     }
 
+    // Writes Values in console using XMLdocument
     public static void ShowBikeValuesXmlDocument()
     {
         if (!File.Exists(BikePath))
@@ -36,7 +39,7 @@ public static class XmlUtility
         XmlDocument doc = new XmlDocument();
         doc.Load(BikePath);
 
-        var nodes = doc.GetElementsByTagName("Bike");
+        var nodes = doc.GetElementsByTagName(TypeName);
 
         Console.WriteLine("\n-- Bikes (XmlDocument) --");
         foreach (XmlNode node in nodes)
@@ -44,7 +47,7 @@ public static class XmlUtility
             Console.WriteLine(node.InnerText);
         }
     }
-
+    // Modifies stated value by Xname in console using Xdocument
     public static void ModifyWithXDocument(string elementName, int index, string newValue)
     {
         if (!File.Exists(BikePath))
@@ -53,8 +56,9 @@ public static class XmlUtility
             return;
         }
 
+
         var doc = XDocument.Load(BikePath);
-        var bikes = doc.Descendants("Bike").ToList();
+        var bikes = doc.Descendants(TypeName).ToList();
 
         if (index < 0 || index >= bikes.Count)
         {
@@ -75,6 +79,7 @@ public static class XmlUtility
         }
     }
 
+    // Modifies stated value by its bikeNode using XmlDocument
     public static void ModifyWithXmlDocument(string elementName, int index, string newValue)
     {
         if (File.Exists(BikePath))
@@ -85,7 +90,7 @@ public static class XmlUtility
 
         XmlDocument doc = new XmlDocument();
         doc.Load(BikePath);
-        var bikeNodes = doc.GetElementsByTagName("Bike");
+        var bikeNodes = doc.GetElementsByTagName(TypeName);
 
         if (index < 0 || index >= bikeNodes.Count)
         {
