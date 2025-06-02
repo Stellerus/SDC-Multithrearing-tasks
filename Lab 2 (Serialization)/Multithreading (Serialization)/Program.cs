@@ -5,13 +5,13 @@ using System.IO;
 using System.Xml.Serialization;
 
 
-    List<Bike> bikeList = new List<Bike>();
-    List<Manufacturer> manufacturerList = new List<Manufacturer>();
-    Random rnd = new Random();
-    string bikeXmlPath = "bikes.xml";
-    string manufacturerXmlPath = "manufacturers.xml";
+List<Bike> bikeList = new List<Bike>();
+List<Manufacturer> manufacturerList = new List<Manufacturer>();
+Random rnd = new Random();
+string bikeXmlPath = "bikes.xml";
+string manufacturerXmlPath = "manufacturers.xml";
 
-    bool exit = false;
+bool exit = false;
 
 while (!exit)
 {
