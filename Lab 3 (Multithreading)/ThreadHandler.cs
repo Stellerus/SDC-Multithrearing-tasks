@@ -1,41 +1,66 @@
-﻿using System;
+﻿using BikeLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
-using BikeLibrary;
+using System.Xml.Serialization;
 
 namespace Lab_3__Multithreading_
 {
 
-    public class BikeProcessor
+    public class ThreadHandler
     {
         private List<Bike> bikes;
-        private string file1 = "file1.json";
-        private string file2 = "file2.json";
-        private string resultFile = "resultFile.json";
-        private object locker = new object();
-        private SemaphoreSlim semaphore = new SemaphoreSlim(5);
 
-        public BikeProcessor()
+        private const string file1 = "file1.xml";
+        private const string file2 = "file2.xml";
+        private const string resultFile = "resultFile.xml";
+
+        private object monitorLocker = new object();
+
+        // 5 initial and 5 max threads in semaphore at the same time
+        const int semaphoreCount = 5;
+        private Semaphore semaphore = new Semaphore(semaphoreCount, semaphoreCount);
+
+        public ThreadHandler()
         {
             bikes = GenerateBikes();
         }
 
+        /// <summary>
+        /// Generates 20 sample bike instances with the same manufacturer
+        /// </summary>
+        /// <returns> List of Bikes</returns>
         private List<Bike> GenerateBikes()
         {
-            var manufacturer = Manufacturer.Create("SuperBike Co.", "123 Bike Street", false);
-            var list = new List<Bike>();
+
+            // Manufacturer naming constants
+            const string manufacturerStandartName = "Bike Co.";
+            const string manufacturerStandartAdress = "123 Street";
+
+            Manufacturer manufacturer = Manufacturer.Create(manufacturerStandartName, manufacturerStandartAdress, false);
+
+            // Bike naming constants
+            const string BikeNamePrefix = $"Bike_";
+            const string BikeSerialNumberPrefix = "SN";
+            const string BikeSerialNumberPostfix = ":0000";
+            const string BikeType = "Mountain";
+
+            List<Bike> list = new List<Bike>();
 
             for (int i = 1; i <= 20; i++)
             {
-                list.Add(Bike.Create(i, $"Bike_{i}", $"SN{i:0000}", "Mountain", manufacturer));
+                list.Add(Bike.Create(i, $"{BikeNamePrefix}{i}", $"{BikeSerialNumberPrefix}{i}{BikeSerialNumberPostfix}", BikeType, manufacturer));
             }
 
             return list;
         }
 
+        /// <summary>
+        /// Serializes Bikes to a file in two threads
+        /// </summary>
         public void SerializeBikes()
         {
             Thread t1 = new Thread(() => SerializeAndSave(bikes.Take(10).ToList(), file1));
@@ -48,12 +73,24 @@ namespace Lab_3__Multithreading_
             t2.Join();
         }
 
+        /// <summary>
+        /// Serializes list of Bikes to file using XmlSerializer
+        /// </summary>
+        /// <param name="bikesToSave"> List of Bikes</param>
+        /// <param name="filename"> Name of a resulting file</param>
         private void SerializeAndSave(List<Bike> bikesToSave, string filename)
         {
-            var json = JsonSerializer.Serialize(bikesToSave, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(filename, json);
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Bike>));
+            using (var writer = new StreamWriter(filename))
+            {
+                serializer.Serialize(writer, bikesToSave);
+            }
+
         }
 
+        /// <summary>
+        /// Reads both files and writes their respective data to single resultFile
+        /// </summary>
         public void MergeFiles()
         {
             Thread t1 = new Thread(() => ReadAndWrite(file1));
@@ -66,27 +103,49 @@ namespace Lab_3__Multithreading_
             t2.Join();
         }
 
+        /// <summary>
+        /// Reads from filename and serializes to file stated in resultFile constant
+        /// </summary>
+        /// <param name="filename"> Name of a file to read</param>
         private void ReadAndWrite(string filename)
         {
-            var content = JsonSerializer.Deserialize<List<Bike>>(File.ReadAllText(filename));
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Bike>));
+
+            List<Bike>? content = new List<Bike>();
+            using (StreamReader reader = new StreamReader(filename))
+            {
+                content = (List<Bike>?)serializer.Deserialize(reader);
+            }
+
             if (content == null) return;
 
             foreach (var bike in content)
             {
-                lock (locker)
+                Monitor.Enter(monitorLocker);
+                try
                 {
-                    var json = JsonSerializer.Serialize(bike, new JsonSerializerOptions { WriteIndented = true });
-                    File.AppendAllText(resultFile, json + Environment.NewLine);
+                    XmlSerializer serializerBike = new XmlSerializer(typeof(Bike));
+                    using (StreamWriter writer = new StreamWriter(resultFile, true))
+                    {
+                        serializerBike.Serialize(writer, bike);
+                    }
+                }
+                finally
+                {
+                    Monitor.Exit(monitorLocker);
                 }
                 Thread.Sleep(100);
             }
         }
 
+        /// <summary>
+        /// Reads resultFile in single thread and shows read time
+        /// </summary>
         public void ReadResultFileSingleThread()
         {
-            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
+            System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();
 
-            var lines = File.ReadAllLines(resultFile);
+            string[] lines = File.ReadAllLines(resultFile);
             foreach (var line in lines)
             {
                 Console.WriteLine(line);
@@ -96,14 +155,18 @@ namespace Lab_3__Multithreading_
             Console.WriteLine($"Single thread read time: {stopwatch.ElapsedMilliseconds} ms");
         }
 
+        /// <summary>
+        /// Reads resultFile with two threads and shows read time
+        /// </summary>
         public void ReadResultFileTwoThreads()
         {
-            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
+            System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();
 
-            var lines = File.ReadAllLines(resultFile);
+            string[] lines = File.ReadAllLines(resultFile);
             int mid = lines.Length / 2;
 
-            Thread t1 = new Thread(() => PrintLines(lines, 0, mid));
+            const int startingLine = 0;
+            Thread t1 = new Thread(() => PrintLines(lines, startingLine, mid));
             Thread t2 = new Thread(() => PrintLines(lines, mid, lines.Length));
 
             t1.Start();
@@ -116,6 +179,12 @@ namespace Lab_3__Multithreading_
             Console.WriteLine($"Two threads read time: {stopwatch.ElapsedMilliseconds} ms");
         }
 
+        /// <summary>
+        /// Prints lines of array between start and end values
+        /// </summary>
+        /// <param name="lines"> Array of lines to print</param>
+        /// <param name="start"> Number of starting line</param>
+        /// <param name="end"> Number of ending line</param>
         private void PrintLines(string[] lines, int start, int end)
         {
             for (int i = start; i < end; i++)
@@ -124,11 +193,14 @@ namespace Lab_3__Multithreading_
             }
         }
 
+        /// <summary>
+        /// Reads resultFile with ten threads (5 simultaneously) and shows read time
+        /// </summary>
         public void ReadResultFileTenThreads()
         {
-            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
+            System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();
 
-            var lines = File.ReadAllLines(resultFile);
+            string[] lines = File.ReadAllLines(resultFile);
             int portion = lines.Length / 10;
 
             List<Thread> threads = new List<Thread>();
@@ -153,12 +225,19 @@ namespace Lab_3__Multithreading_
             }
 
             stopwatch.Stop();
-            Console.WriteLine($"Ten threads (with 5 concurrency) read time: {stopwatch.ElapsedMilliseconds} ms");
+            Console.WriteLine($"Ten threads (5 simultaneously) read time: {stopwatch.ElapsedMilliseconds} ms");
         }
 
+        /// <summary>
+        /// Prints lines of array between start and end values
+        /// Uses a semaphore and releases threads in the end
+        /// </summary>
+        /// <param name="lines"> Array of lines to print</param>
+        /// <param name="start"> Number of starting line</param>
+        /// <param name="end"> Number of ending line</param>
         private void ReadWithSemaphore(string[] lines, int start, int end)
         {
-            semaphore.Wait();
+            semaphore.WaitOne();
 
             try
             {

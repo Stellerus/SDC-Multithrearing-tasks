@@ -1,13 +1,47 @@
 ﻿using Lab_3__Multithreading_;
 
-var processor = new BikeProcessor();
+var threadHandler = new ThreadHandler();
 
-processor.SerializeBikes();
 
-processor.MergeFiles();
+bool exit = false;
 
-processor.ReadResultFileSingleThread();
+while (!exit)
+{
+    //Menu
+    Console.WriteLine("\n--- Main Menu ---");
+    Console.WriteLine("1. Serialize Bikes");
+    Console.WriteLine("2. Serialize objects to XML");
+    Console.WriteLine("3. Show XML file contents");
+    Console.WriteLine("4. Deserialize and display");
+    Console.WriteLine("5. Show all 'Model' values (XDocument)");
+    Console.WriteLine("0. Exit");
 
-processor.ReadResultFileTwoThreads();
+    Console.Write("Select an option: ");
+    string? menuChoice = Console.ReadLine();
 
-processor.ReadResultFileTenThreads();
+    switch (menuChoice)
+    {
+        case "1":
+            threadHandler.SerializeBikes();
+            break;
+        case "2":
+            threadHandler.MergeFiles();
+            break;
+        case "3":
+            threadHandler.ReadResultFileSingleThread();
+            break;
+        case "4":
+            threadHandler.ReadResultFileTwoThreads();
+            break;
+        case "5":
+            threadHandler.ReadResultFileTenThreads();
+            break;
+        case "0":
+            exit = true;
+            break;
+        default:
+            Console.WriteLine("Invalid choice.");
+            break;
+    }
+}
+

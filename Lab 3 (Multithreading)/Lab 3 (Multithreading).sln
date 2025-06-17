@@ -5,7 +5,7 @@ VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab 3 (Multithreading)", "Lab 3 (Multithreading).csproj", "{DE43746D-B87A-4C46-BC6B-8BBA3A162286}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassLib", "..\..\Lab 1 (Reflection)\ClassLib\ClassLib.csproj", "{7246784B-BE41-4D22-BC2E-1181C35627D0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLib", "..\Lab 1 (Reflection)\ClassLib\ClassLib.csproj", "{55D5202D-7BE2-39BA-1A2C-B5CA792B6FCC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{DE43746D-B87A-4C46-BC6B-8BBA3A162286}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE43746D-B87A-4C46-BC6B-8BBA3A162286}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE43746D-B87A-4C46-BC6B-8BBA3A162286}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7246784B-BE41-4D22-BC2E-1181C35627D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7246784B-BE41-4D22-BC2E-1181C35627D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7246784B-BE41-4D22-BC2E-1181C35627D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7246784B-BE41-4D22-BC2E-1181C35627D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55D5202D-7BE2-39BA-1A2C-B5CA792B6FCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55D5202D-7BE2-39BA-1A2C-B5CA792B6FCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55D5202D-7BE2-39BA-1A2C-B5CA792B6FCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55D5202D-7BE2-39BA-1A2C-B5CA792B6FCC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
