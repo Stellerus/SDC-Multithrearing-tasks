@@ -1,10 +1,4 @@
 ﻿using BikeLibrary;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace Lab_4__TPL_
@@ -19,6 +13,16 @@ namespace Lab_4__TPL_
 
         private object monitorLocker = new object();
 
+        // Manufacturer naming constants
+        const string manufacturerStandartName = "Bike Co.";
+        const string manufacturerStandartAdress = "123 Street";
+
+        // Bike naming constants
+        const string BikeNamePrefix = "Bike_";
+        const string BikeSerialNumberPrefix = "SN";
+        const string BikeSerialNumberPostfix = ":0000";
+        const string BikeType = "Mountain";
+
         public TaskHandler()
         {
             bikes = GenerateBikes();
@@ -30,17 +34,7 @@ namespace Lab_4__TPL_
         /// <returns> List of Bike</returns>
         private List<Bike> GenerateBikes()
         {
-            // Manufacturer naming constants
-            const string manufacturerStandartName = "Bike Co.";
-            const string manufacturerStandartAdress = "123 Street";
-
             Manufacturer manufacturer = Manufacturer.Create(manufacturerStandartName, manufacturerStandartAdress, false);
-
-            // Bike naming constants
-            const string BikeNamePrefix = "Bike_";
-            const string BikeSerialNumberPrefix = "SN";
-            const string BikeSerialNumberPostfix = ":0000";
-            const string BikeType = "Mountain";
 
             List<Bike> list = new List<Bike>();
 
@@ -48,6 +42,8 @@ namespace Lab_4__TPL_
             {
                 list.Add(Bike.Create(i, $"{BikeNamePrefix}{i}", $"{BikeSerialNumberPrefix}{i}{BikeSerialNumberPostfix}", BikeType, manufacturer));
             }
+
+            Console.WriteLine("Generated 10 bikes");
 
             return list;
         }
@@ -58,10 +54,12 @@ namespace Lab_4__TPL_
         /// </summary>
         public async Task SerializeBikesAsync()
         {
-            Task task1 = Task.Run(() => SerializeAndSave(bikes.Take(10).ToList(), file1));
-            Task task2 = Task.Run(() => SerializeAndSave(bikes.Skip(10).Take(10).ToList(), file2));
+            Task serializingTask1 = Task.Run(() => SerializeAndSave(bikes.Take(10).ToList(), file1));
+            Task serializingTask2 = Task.Run(() => SerializeAndSave(bikes.Skip(10).Take(10).ToList(), file2));
 
-            await Task.WhenAll(task1, task2);
+            await Task.WhenAll(serializingTask1, serializingTask2);
+
+            Console.WriteLine("Bikes Serialized");
         }
 
         /// <summary>
@@ -94,10 +92,12 @@ namespace Lab_4__TPL_
         {
             try
             {
-                Task task1 = Task.Run(() => ReadAndWrite(file1));
-                Task task2 = Task.Run(() => ReadAndWrite(file2));
+                Task readWriteTask1 = Task.Run(() => ReadAndWrite(file1));
+                Task readWriteTask2 = Task.Run(() => ReadAndWrite(file2));
 
-                await Task.WhenAll(task1, task2);
+                await Task.WhenAll(readWriteTask1, readWriteTask2);
+
+                Console.WriteLine($"Merged {file1} with {file2} to {resultFile}");
             }
             catch (Exception ex)
             {
@@ -165,12 +165,16 @@ namespace Lab_4__TPL_
             try
             {
                 string[] lines = File.ReadAllLines(resultFile);
+
+                // Divide file in two
                 int mid = lines.Length / 2;
 
-                Task task1 = Task.Run(() => PrintLines(lines, 0, mid));
-                Task task2 = Task.Run(() => PrintLines(lines, mid, lines.Length));
+                Task printingTask1 = Task.Run(() => PrintLines(lines, 0, mid));
+                Task printingTask2 = Task.Run(() => PrintLines(lines, mid, lines.Length));
 
-                await Task.WhenAll(task1, task2);
+                await Task.WhenAll(printingTask1, printingTask2);
+
+                Console.WriteLine("Reading with two tasks successful");
             }
             catch (Exception ex)
             {

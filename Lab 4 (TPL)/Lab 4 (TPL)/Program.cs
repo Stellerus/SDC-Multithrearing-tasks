@@ -22,11 +22,9 @@ class Program
             {
                 case "1":
                     await threadHandler.SerializeBikesAsync();
-                    Console.WriteLine("Bikes have been serialized to file1.xml and file2.xml.");
                     break;
                 case "2":
                     await threadHandler.MergeFilesAsync();
-                    Console.WriteLine("Files have been merged into resultFile.xml.");
                     break;
                 case "3":
                     await threadHandler.ReadResultFileTwoTasksAsync();
