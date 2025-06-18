@@ -59,7 +59,7 @@ namespace Lab_3__Multithreading_
         }
 
         /// <summary>
-        /// Serializes Bikes to a file in two threads
+        /// Serializes Bikes to a file with two parallel threads
         /// </summary>
         public void SerializeBikes()
         {
@@ -81,7 +81,7 @@ namespace Lab_3__Multithreading_
         private void SerializeAndSave(List<Bike> bikesToSave, string filename)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<Bike>));
-            using (var writer = new StreamWriter(filename))
+            using (StreamWriter writer = new StreamWriter(filename))
             {
                 serializer.Serialize(writer, bikesToSave);
             }
@@ -104,7 +104,7 @@ namespace Lab_3__Multithreading_
         }
 
         /// <summary>
-        /// Reads from filename and serializes to file stated in resultFile constant
+        /// Reads from filename and serializes to a file stated in resultFile constant
         /// </summary>
         /// <param name="filename"> Name of a file to read</param>
         private void ReadAndWrite(string filename)
