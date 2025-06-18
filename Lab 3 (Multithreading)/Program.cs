@@ -10,10 +10,10 @@ while (!exit)
     //Menu
     Console.WriteLine("\n--- Main Menu ---");
     Console.WriteLine("1. Serialize Bikes");
-    Console.WriteLine("2. Serialize objects to XML");
-    Console.WriteLine("3. Show XML file contents");
-    Console.WriteLine("4. Deserialize and display");
-    Console.WriteLine("5. Show all 'Model' values (XDocument)");
+    Console.WriteLine("2. Merge into single file");
+    Console.WriteLine("3. Read result in 1 thread");
+    Console.WriteLine("4. Read result with 2 threads");
+    Console.WriteLine("5. Read result with 10 threads");
     Console.WriteLine("0. Exit");
 
     Console.Write("Select an option: ");

@@ -80,10 +80,17 @@ namespace Lab_3__Multithreading_
         /// <param name="filename"> Name of a resulting file</param>
         private void SerializeAndSave(List<Bike> bikesToSave, string filename)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Bike>));
-            using (StreamWriter writer = new StreamWriter(filename))
+            try
             {
-                serializer.Serialize(writer, bikesToSave);
+                XmlSerializer serializer = new XmlSerializer(typeof(List<Bike>));
+                using (StreamWriter writer = new StreamWriter(filename))
+                {
+                    serializer.Serialize(writer, bikesToSave);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error serializing to {filename}: {ex.Message}");
             }
 
         }
@@ -109,32 +116,39 @@ namespace Lab_3__Multithreading_
         /// <param name="filename"> Name of a file to read</param>
         private void ReadAndWrite(string filename)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Bike>));
-
-            List<Bike>? content = new List<Bike>();
-            using (StreamReader reader = new StreamReader(filename))
+            try
             {
-                content = (List<Bike>?)serializer.Deserialize(reader);
-            }
+                XmlSerializer serializer = new XmlSerializer(typeof(List<Bike>));
+                List<Bike>? content;
 
-            if (content == null) return;
-
-            foreach (var bike in content)
-            {
-                Monitor.Enter(monitorLocker);
-                try
+                using (StreamReader reader = new StreamReader(filename))
                 {
-                    XmlSerializer serializerBike = new XmlSerializer(typeof(Bike));
-                    using (StreamWriter writer = new StreamWriter(resultFile, true))
+                    content = (List<Bike>?)serializer.Deserialize(reader);
+                }
+
+                if (content == null) return;
+
+                foreach (var bike in content)
+                {
+                    Monitor.Enter(monitorLocker);
+                    try
                     {
-                        serializerBike.Serialize(writer, bike);
+                        XmlSerializer serializerBike = new XmlSerializer(typeof(Bike));
+                        using (StreamWriter writer = new StreamWriter(resultFile, true))
+                        {
+                            serializerBike.Serialize(writer, bike);
+                        }
                     }
+                    finally
+                    {
+                        Monitor.Exit(monitorLocker);
+                    }
+                    Thread.Sleep(100);
                 }
-                finally
-                {
-                    Monitor.Exit(monitorLocker);
-                }
-                Thread.Sleep(100);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading/writing file {filename}: {ex.Message}");
             }
         }
 
@@ -145,7 +159,17 @@ namespace Lab_3__Multithreading_
         {
             System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();
 
-            string[] lines = File.ReadAllLines(resultFile);
+            string[] lines;
+            try
+            {
+                lines = File.ReadAllLines(resultFile);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading file {resultFile}: {ex.Message}");
+                return;
+            }
+
             foreach (var line in lines)
             {
                 Console.WriteLine(line);
@@ -162,7 +186,17 @@ namespace Lab_3__Multithreading_
         {
             System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();
 
-            string[] lines = File.ReadAllLines(resultFile);
+            string[] lines;
+            try
+            {
+                lines = File.ReadAllLines(resultFile);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading file {resultFile}: {ex.Message}");
+                return;
+            }
+
             int mid = lines.Length / 2;
 
             const int startingLine = 0;
@@ -200,7 +234,17 @@ namespace Lab_3__Multithreading_
         {
             System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();
 
-            string[] lines = File.ReadAllLines(resultFile);
+            string[] lines;
+            try
+            {
+                lines = File.ReadAllLines(resultFile);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading file {resultFile}: {ex.Message}");
+                return;
+            }
+
             int portion = lines.Length / 10;
 
             List<Thread> threads = new List<Thread>();
