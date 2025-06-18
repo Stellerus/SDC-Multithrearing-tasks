@@ -24,6 +24,16 @@ namespace Lab_3__Multithreading_
         const int semaphoreCount = 5;
         private Semaphore semaphore = new Semaphore(semaphoreCount, semaphoreCount);
 
+        // Manufacturer naming constants
+        const string manufacturerStandartName = "Bike Co.";
+        const string manufacturerStandartAdress = "123 Street";
+
+        // Bike naming constants
+        const string BikeNamePrefix = $"Bike_";
+        const string BikeSerialNumberPrefix = "SN";
+        const string BikeSerialNumberPostfix = ":0000";
+        const string BikeType = "Mountain";
+
         public ThreadHandler()
         {
             bikes = GenerateBikes();
@@ -35,18 +45,7 @@ namespace Lab_3__Multithreading_
         /// <returns> List of Bikes</returns>
         private List<Bike> GenerateBikes()
         {
-
-            // Manufacturer naming constants
-            const string manufacturerStandartName = "Bike Co.";
-            const string manufacturerStandartAdress = "123 Street";
-
             Manufacturer manufacturer = Manufacturer.Create(manufacturerStandartName, manufacturerStandartAdress, false);
-
-            // Bike naming constants
-            const string BikeNamePrefix = $"Bike_";
-            const string BikeSerialNumberPrefix = "SN";
-            const string BikeSerialNumberPostfix = ":0000";
-            const string BikeType = "Mountain";
 
             List<Bike> list = new List<Bike>();
 
@@ -54,6 +53,8 @@ namespace Lab_3__Multithreading_
             {
                 list.Add(Bike.Create(i, $"{BikeNamePrefix}{i}", $"{BikeSerialNumberPrefix}{i}{BikeSerialNumberPostfix}", BikeType, manufacturer));
             }
+
+            Console.WriteLine("Generated 10 bikes");
 
             return list;
         }
@@ -63,14 +64,16 @@ namespace Lab_3__Multithreading_
         /// </summary>
         public void SerializeBikes()
         {
-            Thread t1 = new Thread(() => SerializeAndSave(bikes.Take(10).ToList(), file1));
-            Thread t2 = new Thread(() => SerializeAndSave(bikes.Skip(10).Take(10).ToList(), file2));
+            Thread serializingThread1 = new Thread(() => SerializeAndSave(bikes.Take(10).ToList(), file1));
+            Thread serializingThread2 = new Thread(() => SerializeAndSave(bikes.Skip(10).Take(10).ToList(), file2));
 
-            t1.Start();
-            t2.Start();
+            serializingThread1.Start();
+            serializingThread2.Start();
 
-            t1.Join();
-            t2.Join();
+            serializingThread1.Join();
+            serializingThread2.Join();
+
+            Console.WriteLine("Bikes Serialized");
         }
 
         /// <summary>
@@ -100,14 +103,16 @@ namespace Lab_3__Multithreading_
         /// </summary>
         public void MergeFiles()
         {
-            Thread t1 = new Thread(() => ReadAndWrite(file1));
-            Thread t2 = new Thread(() => ReadAndWrite(file2));
+            Thread readWriteThread1 = new Thread(() => ReadAndWrite(file1));
+            Thread readWriteThread2 = new Thread(() => ReadAndWrite(file2));
 
-            t1.Start();
-            t2.Start();
+            readWriteThread1.Start();
+            readWriteThread2.Start();
 
-            t1.Join();
-            t2.Join();
+            readWriteThread1.Join();
+            readWriteThread2.Join();
+
+            Console.WriteLine($"Merged {file1} with {file2} to {resultFile}");
         }
 
         /// <summary>
@@ -200,14 +205,14 @@ namespace Lab_3__Multithreading_
             int mid = lines.Length / 2;
 
             const int startingLine = 0;
-            Thread t1 = new Thread(() => PrintLines(lines, startingLine, mid));
-            Thread t2 = new Thread(() => PrintLines(lines, mid, lines.Length));
+            Thread printingThread1 = new Thread(() => PrintLines(lines, startingLine, mid));
+            Thread printingThread2 = new Thread(() => PrintLines(lines, mid, lines.Length));
 
-            t1.Start();
-            t2.Start();
+            printingThread1.Start();
+            printingThread2.Start();
 
-            t1.Join();
-            t2.Join();
+            printingThread1.Join();
+            printingThread2.Join();
 
             stopwatch.Stop();
             Console.WriteLine($"Two threads read time: {stopwatch.ElapsedMilliseconds} ms");
@@ -245,17 +250,20 @@ namespace Lab_3__Multithreading_
                 return;
             }
 
+            // Number of lines that single thread tries to read
             int portion = lines.Length / 10;
 
             List<Thread> threads = new List<Thread>();
 
             for (int i = 0; i < 10; i++)
             {
+                // Starting line equals iteration
                 int start = i * portion;
+                // Check to ensure that on last iteration remaining lines will be covered correctly
                 int end = (i == 9) ? lines.Length : start + portion;
 
-                Thread thread = new Thread(() => ReadWithSemaphore(lines, start, end));
-                threads.Add(thread);
+                Thread readingThread = new Thread(() => ReadWithSemaphore(lines, start, end));
+                threads.Add(readingThread);
             }
 
             foreach (var thread in threads)
@@ -293,6 +301,7 @@ namespace Lab_3__Multithreading_
             finally
             {
                 semaphore.Release();
+                Console.WriteLine("Semaphore released");
             }
         }
     }
