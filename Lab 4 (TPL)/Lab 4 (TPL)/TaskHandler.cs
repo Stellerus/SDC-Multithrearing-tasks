@@ -71,11 +71,20 @@ namespace Lab_4__TPL_
         /// <param name="filename"> Name of a resulting file</param>
         private void SerializeAndSave(List<Bike> bikesToSave, string filename)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Bike>));
-            using (StreamWriter writer = new StreamWriter(filename))
+            try
             {
-                serializer.Serialize(writer, bikesToSave);
+                XmlSerializer serializer = new XmlSerializer(typeof(List<Bike>));
+                using (StreamWriter writer = new StreamWriter(filename))
+                {
+                    serializer.Serialize(writer, bikesToSave);
+                }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error serializing bikes to file [{filename}]: {ex.Message}");
+                throw;
+            }
+
         }
 
         /// <summary>
@@ -83,12 +92,19 @@ namespace Lab_4__TPL_
         /// </summary>
         public async Task MergeFilesAsync()
         {
-           
+            try
+            {
+                Task task1 = Task.Run(() => ReadAndWrite(file1));
+                Task task2 = Task.Run(() => ReadAndWrite(file2));
 
-            Task task1 = Task.Run(() => ReadAndWrite(file1));
-            Task task2 = Task.Run(() => ReadAndWrite(file2));
+                await Task.WhenAll(task1, task2);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error merging files: {ex.Message}");
+                throw;
+            }
 
-            await Task.WhenAll(task1, task2);
         }
 
         /// <summary>
@@ -97,6 +113,8 @@ namespace Lab_4__TPL_
         /// <param name="filename"> Name of a file to read</param>
         private void ReadAndWrite(string filename)
         {
+            try
+            {
             XmlSerializer serializer = new XmlSerializer(typeof(List<Bike>));
             List<Bike>? content;
             using (StreamReader reader = new StreamReader(filename))
@@ -107,24 +125,36 @@ namespace Lab_4__TPL_
             if (content == null)
                 return;
 
-            foreach (var bike in content)
-            {
-                Monitor.Enter(monitorLocker);
-                try
+                foreach (var bike in content)
                 {
-                    XmlSerializer serializerBike = new XmlSerializer(typeof(Bike));
-                    using (StreamWriter writer = new StreamWriter(resultFile, true))
+                    Monitor.Enter(monitorLocker);
+                    try
                     {
-                        serializerBike.Serialize(writer, bike);
+                        XmlSerializer serializerBike = new XmlSerializer(typeof(Bike));
+                        using (StreamWriter writer = new StreamWriter(resultFile, true))
+                        {
+                            serializerBike.Serialize(writer, bike);
+                        }
                     }
+                    catch (Exception exInner)
+                    {
+                        Console.WriteLine($"Error writing bike {bike.ID} from file [{filename}]: {exInner.Message}");
+                        throw;
+                    }
+
+                    finally
+                    {
+                        Monitor.Exit(monitorLocker);
+                    }
+                    Thread.Sleep(100);
                 }
-                
-                finally
-                {
-                    Monitor.Exit(monitorLocker);
-                }
-                Thread.Sleep(100);
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading or processing file [{filename}]: {ex.Message}");
+                throw;
+            }
+
         }
 
         /// <summary>
@@ -132,13 +162,22 @@ namespace Lab_4__TPL_
         /// </summary>
         public async Task ReadResultFileTwoTasksAsync()
         {
-            string[] lines = File.ReadAllLines(resultFile);
-            int mid = lines.Length / 2;
+            try
+            {
+                string[] lines = File.ReadAllLines(resultFile);
+                int mid = lines.Length / 2;
 
-            Task task1 = Task.Run(() => PrintLines(lines, 0, mid));
-            Task task2 = Task.Run(() => PrintLines(lines, mid, lines.Length));
+                Task task1 = Task.Run(() => PrintLines(lines, 0, mid));
+                Task task2 = Task.Run(() => PrintLines(lines, mid, lines.Length));
 
-            await Task.WhenAll(task1, task2);
+                await Task.WhenAll(task1, task2);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error reading result file in two tasks: {ex.Message}");
+                throw;
+            }
+
         }
 
         /// <summary>
@@ -149,10 +188,18 @@ namespace Lab_4__TPL_
         /// <param name="end"> Number of ending line</param>
         private void PrintLines(string[] lines, int start, int end)
         {
-            for (int i = start; i < end; i++)
+            try
             {
-                Console.WriteLine(lines[i]);
+                for (int i = start; i < end; i++)
+                {
+                    Console.WriteLine(lines[i]);
+                }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error printing lines: {ex.Message}");
+            }
+
         }
     }
 }

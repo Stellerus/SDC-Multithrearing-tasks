@@ -66,7 +66,7 @@ namespace TaskHandlerTests
 
             string content = File.ReadAllText(resultFile);
             int count = CountOccurrences(content, "<Bike");
-            Assert.That(count, Is.EqualTo(20), "Result file must have 20 instances of bike");
+            Assert.That(count, Is.EqualTo(40), "Result file must have 20 instances (2 counts per instance) of bike");
         }
 
         [Test]

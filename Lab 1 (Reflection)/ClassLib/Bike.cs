@@ -5,7 +5,7 @@ namespace BikeLibrary
     [Serializable]
     public class Bike
     {
-        private int ID { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
         public string SerialNumber { get; set; }
         public string BikeType { get; set; }
