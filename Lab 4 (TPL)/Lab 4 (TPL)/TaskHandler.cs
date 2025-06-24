@@ -7,11 +7,9 @@ namespace Lab_4__TPL_
     {
         private List<Bike> bikes;
 
-        private const string file1 = "file1.xml";
-        private const string file2 = "file2.xml";
-        private const string resultFile = "resultFile.xml";
-
-        private object monitorLocker = new object();
+        private const string bikesFirstSerialized = "bikesFirstSerialized.xml";
+        private const string bikesSecondSerialized = "bikesSecondSerialized.xml";
+        private const string bikesCombinedSerialized = "bikesCombinedSerialized.xml";
 
         // Manufacturer naming constants
         const string manufacturerStandartName = "Bike Co.";
@@ -54,8 +52,13 @@ namespace Lab_4__TPL_
         /// </summary>
         public async Task SerializeBikesAsync()
         {
-            Task serializingTask1 = Task.Run(() => SerializeAndSave(bikes.Take(10).ToList(), file1));
-            Task serializingTask2 = Task.Run(() => SerializeAndSave(bikes.Skip(10).Take(10).ToList(), file2));
+            //Takes 10 first bikes and converts to list for serialization
+            Task serializingTask1 = Task.Run(() =>
+                SerializeAndSave(bikes.Take(10).ToList(), bikesFirstSerialized));
+
+            // Skips already serialized bikes and converts another 10 to list for serialization
+            Task serializingTask2 = Task.Run(() =>
+                SerializeAndSave(bikes.Skip(10).Take(10).ToList(), bikesSecondSerialized)); 
 
             await Task.WhenAll(serializingTask1, serializingTask2);
 
@@ -92,12 +95,12 @@ namespace Lab_4__TPL_
         {
             try
             {
-                Task readWriteTask1 = Task.Run(() => ReadAndWrite(file1));
-                Task readWriteTask2 = Task.Run(() => ReadAndWrite(file2));
+                Task readWriteTask1 = Task.Run(() => ReadAndWrite(bikesFirstSerialized));
+                Task readWriteTask2 = Task.Run(() => ReadAndWrite(bikesSecondSerialized));
 
                 await Task.WhenAll(readWriteTask1, readWriteTask2);
 
-                Console.WriteLine($"Merged {file1} with {file2} to {resultFile}");
+                Console.WriteLine($"Merged {bikesFirstSerialized} with {bikesSecondSerialized} to {bikesCombinedSerialized}");
             }
             catch (Exception ex)
             {
@@ -115,23 +118,22 @@ namespace Lab_4__TPL_
         {
             try
             {
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Bike>));
-            List<Bike>? content;
-            using (StreamReader reader = new StreamReader(filename))
-            {
-                content = (List<Bike>?)serializer.Deserialize(reader);
-            }
+                XmlSerializer serializer = new XmlSerializer(typeof(List<Bike>));
+                List<Bike>? content;
+                using (StreamReader reader = new StreamReader(filename))
+                {
+                    content = (List<Bike>?)serializer.Deserialize(reader);
+                }
 
-            if (content == null)
-                return;
+                if (content == null)
+                    return;
 
                 foreach (var bike in content)
                 {
-                    Monitor.Enter(monitorLocker);
                     try
                     {
                         XmlSerializer serializerBike = new XmlSerializer(typeof(Bike));
-                        using (StreamWriter writer = new StreamWriter(resultFile, true))
+                        using (StreamWriter writer = new StreamWriter(bikesCombinedSerialized, true))
                         {
                             serializerBike.Serialize(writer, bike);
                         }
@@ -142,10 +144,6 @@ namespace Lab_4__TPL_
                         throw;
                     }
 
-                    finally
-                    {
-                        Monitor.Exit(monitorLocker);
-                    }
                     Thread.Sleep(100);
                 }
             }
@@ -164,9 +162,9 @@ namespace Lab_4__TPL_
         {
             try
             {
-                string[] lines = File.ReadAllLines(resultFile);
+                string[] lines = File.ReadAllLines(bikesCombinedSerialized);
 
-                // Divide file in two
+                // Divide file in two (Get the line in the middle of file)
                 int mid = lines.Length / 2;
 
                 Task printingTask1 = Task.Run(() => PrintLines(lines, 0, mid));

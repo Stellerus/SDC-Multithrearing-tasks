@@ -8,4 +8,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Lab 1 (Reflection)\ClassLib\ClassLib.csproj" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="ClassLib">
+			<HintPath>..\Lab 1 (Reflection)\ClassLib\bin\Debug\net6.0\ClassLib.dll</HintPath>
+			<Private>True</Private>
+		</Reference>
+	</ItemGroup>
+
 </Project>

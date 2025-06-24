@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BikeLibrary;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,68 +11,68 @@ namespace Lab_5__Concurrency_
 {
     internal class ConcurrencyTaskTool
     {
-    }
-}
+        // List of bike
+        private List<Bike> allBikes;
+        // 50 for this task
+        private const int numberOfBikes = 50;
 
-        // 50 объектов Bike
-        private List<Bike> bikes50;
-
-        // Имена файлов для распределения 50 записей (по 10 в каждом)
+        // Names of files that this class spreads bikes across
         private readonly string[] fileNames = new string[]
         {
-            "file1.xml",
-            "file2.xml",
-            "file3.xml",
-            "file4.xml",
-            "file5.xml"
+            "bikesSerializedPart1.xml",
+            "bikesSerializedPart2.xml",
+            "bikesSerializedPart3.xml",
+            "bikesSerializedPart4.xml",
+            "bikesSerializedPart5.xml"
         };
 
-        // Итоговый объединённый файл
-        private const string mergedFile = "mergedFile.xml";
+        // Single file with all bikes
+        private const string allBikesSerialized = "allBikesSerialized.xml";
 
-        // Потокобезопасный словарь, где ключ – имя файла,
-        // а значение – ConcurrentQueue с записями из этого файла.
-        private ConcurrentDictionary<string, ConcurrentQueue<Bike>> fileDictionary =
-            new ConcurrentDictionary<string, ConcurrentQueue<Bike>>();
+        // Concurrent Dictionary with file name as key and
+        // value as ConcurrentQueue with records from the file
+        private ConcurrentDictionary<string, ConcurrentQueue<Bike>> fileDictionary = new();
 
-        // Для ProgressBar
+        // Stats for progress bar realization
         private int recordsRead = 0;
-        private int totalRecords = 0; // Всего 50 записей
+        private int totalRecords = 0; // 50 total
 
-        // Токен отмены для фонового сортировщика
-        private CancellationTokenSource sortCts = new CancellationTokenSource();
+        // Token to stop sorter
+        private CancellationTokenSource sortCts = new();
 
-        public ConcurrencyHandler()
+        public ConcurrencyTaskTool()
         {
-            bikes50 = Generate50Bikes();
-            totalRecords = bikes50.Count;
+            allBikes = GenerateBikes(numberOfBikes);
+            totalRecords = allBikes.Count;
         }
 
         /// <summary>
-        /// Задание 0:
-        /// Генерирует 50 экземпляров Bike и распределяет их по 5 файлам (по 10 записей в каждом).
+        /// Generates 50 instances of Bike and spreads across 5 files (10 per file)
         /// </summary>
         public async Task GenerateFilesAsync()
         {
-            // Разбиваем 50 объектов на группы по 10
-            var groups = bikes50
+            // Spread 50 instances in groups of 10
+            var groups = allBikes
                 .Select((bike, index) => new { bike, index })
                 .GroupBy(x => x.index / 10)
                 .Select(g => g.Select(x => x.bike).ToList())
                 .ToList();
 
-            // Параллельная запись каждой группы в свой файл
+            // Parallel record into array
             var tasks = groups.Select((group, idx) =>
                 Task.Run(() => SerializeBikeGroup(group, fileNames[idx])))
                 .ToArray();
 
             await Task.WhenAll(tasks);
-            Console.WriteLine("50 записей распределены по 5 файлам.");
+            Console.WriteLine("50 instances are spread across 5 files");
         }
 
+
         /// <summary>
-        /// Сериализует список объектов Bike в указанный файл.
+        /// Serializes list of bikes into a file
         /// </summary>
+        /// <param name="bikesToSave"> List with bikes to Serialize </param>
+        /// <param name="fileName"> name of destination file </param>
         private void SerializeBikeGroup(List<Bike> bikesToSave, string fileName)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<Bike>));
@@ -82,18 +83,38 @@ namespace Lab_5__Concurrency_
         }
 
         /// <summary>
-        /// Генерирует 50 объектов Bike.
+        /// Generates 50 instances of Bike.
         /// </summary>
-        private List<Bike> Generate50Bikes()
+        /// /// <param name="numberOfBikes"> How many bikes to generate</param>
+        private List<Bike> GenerateBikes(int numberOfBikes)
         {
             const string manufacturerName = "Bike Co.";
             const string manufacturerAddress = "123 Street";
-            Manufacturer manufacturer = Manufacturer.Create(manufacturerName, manufacturerAddress, false);
+
+            // Bike naming constants
+            const string BikeNamePrefix = "Bike_";
+            const string BikeSerialNumberPrefix = "SN";
+            const string BikeSerialNumberPostfix = ":0000";
+            const string BikeType = "Mountain";
+
+
+            Manufacturer manufacturer = 
+                Manufacturer.Create(manufacturerName, manufacturerAddress, false);
 
             List<Bike> bikes = new List<Bike>();
-            for (int i = 1; i <= 50; i++)
+            for (int i = 1; i <= numberOfBikes; i++)
             {
-                bikes.Add(Bike.Create(i, $"Bike_{i}", $"SN{i:0000}", "Mountain", manufacturer));
+                bikes.Add
+                    (
+                        Bike.Create
+                        (
+                            i, 
+                            $"{BikeNamePrefix}{i}", 
+                            $"{BikeSerialNumberPrefix}{i}{BikeSerialNumberPostfix}", 
+                            BikeType, 
+                            manufacturer
+                        )
+                    );
             }
             return bikes;
         }
@@ -121,15 +142,17 @@ namespace Lab_5__Concurrency_
                 Console.WriteLine($"\nСодержимое файла [{kvp.Key}]:");
                 foreach (var bike in kvp.Value)
                 {
-                    Console.WriteLine($"Bike ID: {bike.Id}, Model: {bike.Model}");
+                    Console.WriteLine($"Bike ID: {bike.ID}, Type: {bike.BikeType}");
                 }
             }
         }
 
         /// <summary>
-        /// Читает файл, десериализует список Bike, добавляет каждую запись в ConcurrentQueue,
-        /// обновляет ProgressBar и выполняет задержку 100 мс после каждой записи.
+        /// Reads file and fills the ConcurrentQueue with these bikes
+        /// 
         /// </summary>
+        /// <param name="fileName"> Name of the file to read </param>
+        /// <returns></returns>
         private async Task ReadFileAndPopulateDictionaryAsync(string fileName)
         {
             List<Bike> bikesFromFile;
@@ -151,7 +174,7 @@ namespace Lab_5__Concurrency_
         }
 
         /// <summary>
-        /// Обновляет ProgressBar в консоли на основании количества прочитанных записей.
+        /// Updates ProgressBar in console accodring to read 
         /// </summary>
         private void UpdateProgressBar()
         {
@@ -164,22 +187,21 @@ namespace Lab_5__Concurrency_
         }
 
         /// <summary>
-        /// Объединяет записи из всех потокобезопасных коллекций словаря и записывает результат в итоговый файл.
+        /// Merges all records into a single complete one
         /// </summary>
         private void MergeDictionaryToFile()
         {
             List<Bike> mergedBikes = fileDictionary.Values.SelectMany(q => q).ToList();
             XmlSerializer serializer = new XmlSerializer(typeof(List<Bike>));
-            using (var writer = new StreamWriter(mergedFile, false))
+            using (var writer = new StreamWriter(allBikesSerialized, false))
             {
                 serializer.Serialize(writer, mergedBikes);
             }
         }
 
         /// <summary>
-        /// Задание 2:
-        /// Запускает фонового обработчик, который каждую секунду сортирует значения словаря
-        /// для каждого ключа по алфавитному порядку свойства Id и выводит результат в консоль.
+        /// Starts in background and sorts the Key of the Concurrent Dictionary each second
+        /// in alphabetical order of id and prints the result in console
         /// </summary>
         public void StartSortingHandler()
         {
@@ -191,23 +213,23 @@ namespace Lab_5__Concurrency_
                     {
                         if (fileDictionary.TryGetValue(key, out ConcurrentQueue<Bike> queue))
                         {
-                            // Получаем snapshot и выполняем сортировку по свойству Id
-                            var sorted = queue.ToList().OrderBy(b => b.Id.ToString()).ToList();
-                            Console.WriteLine($"\n[СОРТИРОВКА] Файл {key}:");
+                            // sorting by ID from Snapshot
+                            var sorted = queue.ToList().OrderBy(b => b.ID.ToString()).ToList();
+                            Console.WriteLine($"\n[Sorting] File {key}:");
                             foreach (var bike in sorted)
                             {
-                                Console.Write($"[{bike.Id}] ");
+                                Console.Write($"[{bike.ID}] ");
                             }
                             Console.WriteLine();
                         }
                     }
-                    await Task.Delay(1000); // обновление раз в секунду
+                    await Task.Delay(1000); // 1 second delay
                 }
             }, sortCts.Token);
         }
 
         /// <summary>
-        /// Останавливает фоновый обработчик сортировки.
+        /// Stops the sorting
         /// </summary>
         public void StopSortingHandler()
         {
