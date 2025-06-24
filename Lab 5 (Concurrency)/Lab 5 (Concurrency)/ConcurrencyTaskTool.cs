@@ -19,7 +19,8 @@ internal class ConcurrencyTaskTool
     private ProgressBar progressBar;
 
     private List<Bike> allBikes;
-    private const int numberOfBikes = 50;
+    private const int numberOfBikes = 50; // total bikes
+    private const int bikesInGroup = 10; // total bikes in a group
 
     // File names for serialized bike groups
     private readonly string[] fileNames = new[]
@@ -57,7 +58,7 @@ internal class ConcurrencyTaskTool
     {
         var groups = allBikes
             .Select((bike, index) => new { bike, index })
-            .GroupBy(x => x.index / 10)
+            .GroupBy(x => x.index / bikesInGroup)
             .Select(g => g.Select(x => x.bike).ToList())
             .ToList();
 
@@ -113,7 +114,7 @@ internal class ConcurrencyTaskTool
             Interlocked.Increment(ref recordsRead);
             progressBar.Report(recordsRead);
 
-            await Task.Delay(500); // half a second
+            await Task.Delay(500); // half a second for visibility
         }
 
         fileDictionary.TryAdd(fileName, queue);
@@ -157,7 +158,7 @@ internal class ConcurrencyTaskTool
                         Console.WriteLine();
                     }
                 }
-                await Task.Delay(1000);
+                await Task.Delay(2000); // 2 seconds for visibility
             }
         }, sortCts.Token);
     }

@@ -2,18 +2,28 @@
 
 public class BikeGenerator
 {
+    // Bike naming constants
+    const string BikeNamePrefix = "Bike_";
+    const string BikeSerialNumberPrefix = "SN";
+    const string BikeSerialNumberPostfix = ":0000";
+    const string BikeType = "Mountain";
+
+    // Manufacturer naming constants
+    const string manufacturerName = "Bike Co.";
+    const string manufacturerAddress = "123 Street";
+
     public List<Bike> Generate(int count)
     {
-        const string manufacturerName = "Bike Co.";
-        const string manufacturerAddress = "123 Street";
-        var manufacturer = Manufacturer.Create(manufacturerName, manufacturerAddress, false);
+
+        var manufacturer = 
+            Manufacturer.Create(manufacturerName, manufacturerAddress, false);
 
         return Enumerable.Range(1, count)
             .Select(i => Bike.Create(
                 i,
-                $"Bike_{i}",
-                $"SN{i}:0000",
-                "Mountain",
+                $"{BikeNamePrefix}{i}",
+                $"{BikeSerialNumberPrefix}{i}{BikeSerialNumberPostfix}",
+                BikeType,
                 manufacturer))
             .ToList();
     }

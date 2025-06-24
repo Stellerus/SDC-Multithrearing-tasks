@@ -7,6 +7,7 @@ public class BikeSerializer
     {
         var serializer = new XmlSerializer(typeof(List<Bike>));
         using var writer = new StreamWriter(filePath);
+
         serializer.Serialize(writer, bikes);
     }
 
@@ -14,6 +15,7 @@ public class BikeSerializer
     {
         var serializer = new XmlSerializer(typeof(List<Bike>));
         using var reader = new StreamReader(filePath);
+
         return (List<Bike>)serializer.Deserialize(reader);
     }
 }
