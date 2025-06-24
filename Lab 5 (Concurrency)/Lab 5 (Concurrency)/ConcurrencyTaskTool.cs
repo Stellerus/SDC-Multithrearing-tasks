@@ -113,7 +113,7 @@ internal class ConcurrencyTaskTool
             Interlocked.Increment(ref recordsRead);
             progressBar.Report(recordsRead);
 
-            await Task.Delay(1000);
+            await Task.Delay(500); // half a second
         }
 
         fileDictionary.TryAdd(fileName, queue);
