@@ -1,0 +1,42 @@
+﻿@page
+@model WebDev_Practice1.Pages.WeatherModel
+@{
+
+    ViewData["Title"] = "Weather";
+
+    <form method="post">
+        <div class="form-element"
+            <label asp-for = "Latitude" class="form-label"></label asp-for>
+            <label asp-for="Latitude" class="form-control"></label asp-for>
+            <span asp-validation-for="Latitude" class="text-danger"></span>
+        <</div>
+
+        <div class="form-element"
+            <label asp-for = "Longtitude" class="form-label"></label asp-for>
+            <label asp-for="Longtitude" class="form-control"></label asp-for>
+            <span asp-validation-for="Longtitude" class="text-danger"></span>
+        <</div>
+
+        <div class="form-element">
+            <input type="submit" value="Get Weather" />
+        </div>
+    </form>
+
+    if (Model.Result is null)
+    {
+        <p>No results yet, enter coordinates and press "Get Weather" again</p>
+    }
+    else if (Model.Result.current_weather != null)
+    {
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Current Weather @Model.Result.current_weather.time</h5>
+
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>Current weather missing in response</p>
+    }
+}
